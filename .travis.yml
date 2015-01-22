@@ -5,4 +5,7 @@ install:
   - "pip install -r requirements.txt"
   - "cp bitcoin_exchange/settings.py.sample bitcoin_exchange/settings.py"
   - "python manage.py migrate"
-script: "python manage.py test"
+script:
+  -"python manage.py test"
+notifications:
+  email: false
