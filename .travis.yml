@@ -6,6 +6,6 @@ install:
   - "cp bitcoin_exchange/settings.py.sample bitcoin_exchange/settings.py"
   - "python manage.py migrate"
 script:
-  -"python manage.py test"
+  - "python manage.py test"
 notifications:
   email: false
