@@ -1,5 +1,7 @@
 # bitcoin-exchange
 
+[![Build Status](https://travis-ci.org/film42/bitcoin-exchange.svg?branch=master)](https://travis-ci.org/film42/bitcoin-exchange)
+
 A web app to facilitate bitcoin exchange
 
 #### Getting Started
