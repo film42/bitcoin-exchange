@@ -1,3 +1,5 @@
 db.sqlite3
 *.pyc
 bitcoin_exchange/settings.py
+
+.DS_Store
