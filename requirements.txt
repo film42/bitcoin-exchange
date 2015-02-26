@@ -1,3 +1,4 @@
 Django==1.7.3
+enum34==1.0.4
 honcho==0.5.0
 wsgiref==0.1.2
