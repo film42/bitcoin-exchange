@@ -51,6 +51,7 @@ class User(AbstractUser):
     pass
 
 
+# Is this needed?
 auth_models.User = User
 
 
