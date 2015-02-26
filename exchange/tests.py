@@ -47,3 +47,34 @@ class OrderCRUD(TestCase):
         order.amount = 10000000
         with self.assertRaises(InvalidOperation):
             order.save()
+
+    def test_crud_trade(self):
+        order_sell = Order.objects.create(limit=5, amount=5)
+        order_buy = Order.objects.create(limit=5, amount=5)
+        trade = Trade.objects.create(buy_order_id=order_buy.id, sell_order_id=order_sell.id, rate=3.141596)
+
+        # read
+        self.assertEqual(trade.buy_order_id, order_buy.id)
+        self.assertEqual(trade.sell_order_id, order_sell.id)
+        self.assertEqual(trade.rate, 3.141596)
+        self.assertEqual(False, trade.filled)
+
+        # update
+        trade.sell_order = order_buy
+        trade.buy_order = order_sell
+        trade.rate = 4
+        trade.filled = True
+        trade.save()
+        trade = Trade.objects.get(id=trade.id)
+
+        # read
+        self.assertEqual(trade.buy_order_id, order_sell.id)
+        self.assertEqual(trade.sell_order_id, order_buy.id)
+        self.assertEqual(trade.rate, 4)
+        self.assertEqual(True, trade.filled)
+        id = trade.id
+
+        trade.delete()
+        with self.assertRaises(Trade.DoesNotExist):
+            Trade.objects.get(id=id)
+
