@@ -1,9 +1,9 @@
 import inspect
 
 from django.db import models
-
 from django.utils.translation import ugettext_lazy as _
-from django.contrib.auth.models import User
+from django.contrib.auth import models as auth_models
+from django.contrib.auth.models import AbstractUser
 
 from enum import Enum
 
@@ -47,8 +47,12 @@ class BaseModel(models.Model):
         verbose_name_plural = _('BaseModels')
 
 
-class User(User):
+class User(AbstractUser):
     pass
+
+
+# Is this needed?
+auth_models.User = User
 
 
 class Order(BaseModel):
