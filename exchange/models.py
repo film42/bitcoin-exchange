@@ -1,7 +1,6 @@
 import inspect
 
 from django.db import models
-
 from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth.models import User
 
@@ -62,6 +61,10 @@ class Order(BaseModel):
     to_currency = models.CharField(max_length=3,
                                    choices=CurrencyTypes.choices())  # it should not be possible for the from currency to equal the to currency
 
+    def __unicode__(self):
+        return "id: " + str(self.id) + " " + "\nOrder type: " + TradeTypes.choices()[int(self.order_type)][
+            1] + " " + "\nside: " + SideTypes.choices()[int(self.side)][1] + " amount: " + str(self.amount)
+
     class Meta:
         app_label = "exchange"
         verbose_name = _('Order')
@@ -94,7 +97,7 @@ class Exchange(BaseModel):
         verbose_name_plural = _('Exchanges')
 
 
-#security supported by exchange
+# security supported by exchange
 class ExchangeSecurity(BaseModel):
     exchange = models.ForeignKey('Exchange')
     currency_type = models.CharField(max_length=3, choices=CurrencyTypes.choices())
