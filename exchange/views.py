@@ -22,7 +22,7 @@ class ExchangeViewSet(viewsets.ModelViewSet):
 
 
 class AccountViewSet(viewsets.ModelViewSet):
-    queryset = Exchange.objects.all()
+    queryset = Account.objects.all()
     serializer_class = AccountSerializer
 
 
