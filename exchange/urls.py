@@ -14,4 +14,5 @@ router.register(r'accounts', views.AccountViewSet)
 
 urlpatterns = patterns('',
                        url(r'^', include(router.urls)),
+                       url(r'^home/', views.home, name='Home'),
 )
