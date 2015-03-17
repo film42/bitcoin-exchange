@@ -32,3 +32,15 @@ def home(request):
     template = loader.get_template('exchange/index.html')
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
+
+
+def client(request):
+    template = loader.get_template('exchange/client-view.html')
+    context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
+
+
+def login(request):
+    template = loader.get_template('exchange/login.html')
+    context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
