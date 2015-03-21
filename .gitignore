@@ -1,9 +1,7 @@
 db.sqlite3
 *.pyc
 bitcoin_exchange/settings.py
-www/
-
-.DS_Store
 .idea/
 .DS_Store
 *.iml
+www/
