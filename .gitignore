@@ -1,6 +1,15 @@
 db.sqlite3
 *.pyc
 bitcoin_exchange/settings.py
+<<<<<<< HEAD
 www/
+=======
+<<<<<<< HEAD
+.idea/
+.DS_Store
+*.iml
+=======
+>>>>>>> 63ad854a27b1f52ea02b05f71faa1538143ad152
 
 .DS_Store
+>>>>>>> gt/temp

@@ -12,16 +12,16 @@
     <title>Bitcoin Exchange - Simple Powerful</title>
 
     <!-- Bootstrap Core CSS -->
-    <link href="css/bootstrap.min.css" rel="stylesheet">
+    <link href="/static/css/bootstrap.min.css" rel="stylesheet">
 
     <!-- Custom CSS -->
-    <link href="css/bitcoin-exchange.css" rel="stylesheet">
+    <link href="/static/css/bitcoin-exchange.css" rel="stylesheet">
 
     <!-- Favicon -->
-    <link rel="icon" href="img/ico/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/static/img/ico/favicon.ico" type="image/x-icon">
 
     <!-- Custom Fonts -->
-    <link href="font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+    <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
     <link href="http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,700,300italic,400italic,700italic" rel="stylesheet" type="text/css">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
@@ -41,7 +41,7 @@
         <ul class="sidebar-nav">
             <a id="menu-close" href="#" class="btn btn-light btn-lg pull-right toggle"><i class="fa fa-times"></i></a>
             <li class="sidebar-brand">
-                <a href="#top">Start Bootstrap</a>
+                <a href="#top">Bitcoin Exchange</a>
             </li>
             <li>
                 <a href="#top">Home</a>
@@ -53,7 +53,7 @@
                 <a href="#services">Services</a>
             </li>
             <li>
-                <a href="#portfolio">Portfolio</a>
+                <a href="#portfolio">Simulation</a>
             </li>
             <li>
                 <a href="#contact">Contact</a>
@@ -156,54 +156,41 @@
         <!-- /.container -->
     </section>
 
-    <!-- Callout -->
-    <aside class="callout">
-        <div class="text-vertical-center">
-            <h1 class="callout-text">Ready to start?</h1>
-            <br>
-            <a href="#about" class="btn btn-blue btn-lg btn-grande">sign up</a>
-        </div>
-    </aside>
-
     <!-- Portfolio -->
-    <section id="portfolio" class="portfolio">
+    <section id="market" class="market">
         <div class="container">
             <div class="row">
                 <div class="col-lg-10 col-lg-offset-1 text-center">
-                    <h2>Our Work</h2>
+                    <h1>The Market</h1>
                     <hr class="small">
                     <div class="row">
                         <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-1.jpg">
-                                </a>
+                            <div>
+                                <h2>24 Hour Average</h2>
+                                <h2 id="average"></h2>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-2.jpg">
-                                </a>
+                            <div>
+                                <h2>Last 24 Hours</h2>
+                                <h2 id="yesterday"></h2>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-3.jpg">
-                                </a>
+                            <div>
+                                <h2>Ask / Bid</h2>
+                                <h2 id="ask-bid"></h2>
                             </div>
                         </div>
                         <div class="col-md-6">
-                            <div class="portfolio-item">
-                                <a href="#">
-                                    <img class="img-portfolio img-responsive" src="img/portfolio-4.jpg">
-                                </a>
+                            <div>
+                                <h2>Total Volume</h2>
+                                <h2 id="volume"></h2>
                             </div>
                         </div>
                     </div>
                     <!-- /.row (nested) -->
-                    <a href="#" class="btn btn-dark">View More Items</a>
+
                 </div>
                 <!-- /.col-lg-10 -->
             </div>
@@ -217,23 +204,37 @@
         <div class="container">
             <div class="row">
                 <div class="col-lg-12 text-center">
-                    <h3>The buttons below are impossible to resist.</h3>
-                    <a href="#" class="btn btn-lg btn-light">Click Me!</a>
-                    <a href="#" class="btn btn-lg btn-dark">Look at Me!</a>
+                    <h1>The Game</h1>
+                    <hr class="small">
+                    <h3>Trade like a pro without spending a dime.</h3>
+                    <a href="#" class="btn btn-lg btn-light">Find out More!</a>
+                    <a href="#" class="btn btn-lg btn-dark">Login</a>
                 </div>
             </div>
         </div>
     </aside>
 
-    <!-- Map -->
-    <section id="contact" class="map">
-        <iframe width="100%" height="100%" frameborder="0" scrolling="no" marginheight="0" marginwidth="0" src="https://maps.google.com/maps?f=q&amp;source=s_q&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A&amp;output=embed"></iframe>
-        <br />
-        <small>
-            <a href="https://maps.google.com/maps?f=q&amp;source=embed&amp;hl=en&amp;geocode=&amp;q=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;aq=0&amp;oq=twitter&amp;sll=28.659344,-81.187888&amp;sspn=0.128789,0.264187&amp;ie=UTF8&amp;hq=Twitter,+Inc.,+Market+Street,+San+Francisco,+CA&amp;t=m&amp;z=15&amp;iwloc=A"></a>
-        </small>
-        </iframe>
-    </section>
+    <!-- Callout -->
+    <aside class="callout">
+        <div class="text-vertical-center">
+            <h1 class="callout-text">Ready to start?</h1>
+            <br>
+            <a href="#about" class="btn btn-blue btn-lg btn-grande">sign up</a>
+        </div>
+    </aside>
+
+    <!-- Call to Action -->
+    <!--<aside class="callout-game">-->
+        <!--<div class="container">-->
+            <!--<div class="row">-->
+                <!--<div class="col-lg-12 text-center">-->
+                    <!--<h3>The buttons below are impossible to resist.</h3>-->
+                    <!--<a href="#" class="btn btn-lg btn-light">Click Me!</a>-->
+                    <!--<a href="#" class="btn btn-lg btn-dark">Look at Me!</a>-->
+                <!--</div>-->
+            <!--</div>-->
+        <!--</div>-->
+    <!--</aside>-->
 
     <!-- Footer -->
     <footer>
@@ -271,42 +272,13 @@
     </footer>
 
     <!-- jQuery -->
-    <script src="js/jquery.js"></script>
+    <script src="/static/js/jquery.js"></script>
 
     <!-- Bootstrap Core JavaScript -->
-    <script src="js/bootstrap.min.js"></script>
+    <script src="/static/js/bootstrap.min.js"></script>
 
-    <!-- Custom Theme JavaScript -->
-    <script>
-    // Closes the sidebar menu
-    $("#menu-close").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Opens the sidebar menu
-    $("#menu-toggle").click(function(e) {
-        e.preventDefault();
-        $("#sidebar-wrapper").toggleClass("active");
-    });
-
-    // Scrolls to the selected menu item on the page
-    $(function() {
-        $('a[href*=#]:not([href=#])').click(function() {
-            if (location.pathname.replace(/^\//, '') == this.pathname.replace(/^\//, '') || location.hostname == this.hostname) {
-
-                var target = $(this.hash);
-                target = target.length ? target : $('[name=' + this.hash.slice(1) + ']');
-                if (target.length) {
-                    $('html,body').animate({
-                        scrollTop: target.offset().top
-                    }, 1000);
-                    return false;
-                }
-            }
-        });
-    });
-    </script>
+    <!-- Custom JavaScript -->
+    <script src="/static/js/landing.js"></script>
 
 </body>
 
