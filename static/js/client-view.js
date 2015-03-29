@@ -54,6 +54,20 @@ var calcBuyingCost = function (btc_amount, asking_price) {
 };
 
 $('#buy-btn').click(function (e) {
+    var btc_amount = $('#btc-buy-amount').val();
+    var buying_price = $('#btc-buy-price-amount').val();
+
+    if(btc_amount != 0 && buying_price != 0 && !isNaN(btc_amount) && !isNaN(buying_price)) {
+        var buy_request = {
+            //id: some session var?
+            amount:btc_amount,
+            price:buying_price
+        }
+        var url = "https://ourdomain/buy";
+        $.post( url, JSON.stringify(buy_request), function (response) {
+            // crate an open order
+        })
+    }
 
 });
 
