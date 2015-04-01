@@ -188,7 +188,7 @@ body {
 
 .account-actions {
     font-size: 12px;
-    border-bottom: 1px solid @gray;
+    border-bottom: 1px solid @faint-gray;
     margin-right: -10px;
 }
 
@@ -240,7 +240,38 @@ body {
     color: @gray-lighter;
 }
 
+.price-chart-place-holder {
+    width: 100%;
+    height: 400px;
+    background: url(../img/price-chart.png) no-repeat center center scroll;
+}
 
+.order-book-place-holder {
+    width: 100%;
+    height: 800px;
+    background: url(../img/order-book.png) no-repeat center center scroll;
+}
+
+// Table
+.table {
+    font-size: 12px;
+}
+
+.table > thead > tr > th {
+    vertical-align: middle;
+    border-bottom: 1px solid @faint-gray;
+}
+
+.table > tbody > tr > th {
+    vertical-align: middle;
+    border-bottom: 1px solid @faint-gray;
+    font-weight: normal;
+}
+
+.table-responsive {
+    margin-left: -15px;
+    margin-right: -15px;
+}
 
 // Buttons
 

@@ -273,10 +273,10 @@
                     <div class="row account-actions">
                         <br>
                         <div class="col-lg-6">
-                            <p><i class="fa fa-arrow-up"></i><a class="link" href=""> Withdraw</a></p>
+                            <p><i class="fa fa-arrow-up"></i><a class="link" href="" id="withdraw"> Withdraw</a></p>
                         </div>
                         <div class="col-lg-6">
-                            <p><i class="fa fa-arrow-down"></i><a class="link" href=""> Deposit</a></p>
+                            <p><i class="fa fa-arrow-down"></i><a class="link" href="" id="deposit"> Deposit</a></p>
                         </div>
                     </div>
                     <div class="row">
@@ -285,7 +285,7 @@
                             <p>BTC</p>
                         </div>
                         <div class="col-lg-8">
-                            <p class="right"><strong>10000</strong></p>
+                            <p class="right" id="btc-balance"><strong>10000</strong></p>
                         </div>
                     </div>
                     <div class="row">
@@ -293,16 +293,16 @@
                             <p>USD</p>
                         </div>
                         <div class="col-lg-8">
-                            <p class="right"><strong>2380000</strong></p>
+                            <p class="right" id="usd-balance"><strong>2380000</strong></p>
                         </div>
                     </div>
                     <br>
                     <div class="row">
                         <div class="col-lg-12">
                             <ul class="nav nav-tabs">
-                                <li class="active"><a href="#buy" data-toggle="tab">BUY</a>
+                                <li class="active"><a href="#buy" data-toggle="tab" id="buy-tab">BUY</a>
                                 </li>
-                                <li class="tab"><a href="#sell" data-toggle="tab">SELL</a>
+                                <li class="tab"><a href="#sell" data-toggle="tab" id="sell-tab">SELL</a>
                                 </li>
                             </ul>
 
@@ -310,63 +310,90 @@
                             <div class="tab-content">
                                 <div class="tab-pane fade in active" id="buy">
                                     <br>
-                                    <input class="form-control" placeholder="Amount (BTC)">
+                                    <input class="form-control" placeholder="Amount (BTC)" id="btc-buy-amount">
                                     <br>
-                                    <input class="form-control" placeholder="Price (per BTC)">
+                                    <input class="form-control" placeholder="Price (per BTC)" id="btc-buy-price-amount">
                                     <div class="row">
                                         <br>
                                         <div class="col-lg-6">
                                             <p>Cost</p>
                                         </div>
                                         <div class="col-lg-6">
-                                            <p class="right"><strong>0</strong></p>
+                                            <p class="right" id="btc-buy-cost"><strong>0</strong></p>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="centered">
-                                        <button type="button" class="btn btn-custom btn-primary btn-lg">BUY</button>
+                                        <button type="button" class="btn btn-custom btn-primary btn-lg" id="buy-btn">BUY</button>
                                     </div>
                                 </div>
                                 <div class="tab-pane fade" id="sell">
                                     <br>
-                                    <input class="form-control" placeholder="Amount (BTC)">
+                                    <input class="form-control" placeholder="Amount (BTC)" id="btc-sell-amount">
                                     <br>
-                                    <input class="form-control" placeholder="Price (per BTC)">
+                                    <input class="form-control" placeholder="Price (per BTC)" id="btc-sell-price-amount">
                                     <div class="row">
                                         <br>
                                         <div class="col-lg-6">
                                             <p>Credit (USD)</p>
                                         </div>
                                         <div class="col-lg-6">
-                                            <p class="right"><strong>0</strong></p>
+                                            <p class="right" id="btc-sell-credit"><strong>0</strong></p>
                                         </div>
                                     </div>
                                     <br>
                                     <div class="centered">
-                                        <button type="button" class="btn btn-custom btn-primary btn-lg">SELL</button>
+                                        <button type="button" class="btn btn-custom btn-primary btn-lg" id="sell-btn">SELL</button>
                                     </div>
                                 </div>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="col-lg-4 column">
+                <div class="col-lg-3 column">
                     <div class="row section-header">
                     <h5>ORDER BOOK</h5>
                     </div>
-                    <div class="row">
-                        <div class="col-lg-12">
-                           <!--  <div class="flot-chart">
-                                <div class="flot-chart-content" id="flot-line-chart-moving"></div>
-                            </div> -->
-                        </div>
-                    </div>
+                    <div class="order-book-place-holder"></div>
                 </div>
-                <div class="col-lg-6">
+                <div class="col-lg-7">
                     <div class="row section-header">
                         <h5>PRICE CHART</h5>
                     </div>
-                </div>
+                    <div class="price-chart-place-holder"></div>
+                    <div class="row section-header">
+                        <h5>OPEN ORDERS</h5>
+                    </div>
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th>Size</th>
+                                <th>Filled</th>
+                                <th>Price(USD)</th>
+                                <th>Time</th>
+                                <th>Status</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <th>1.20</th>
+                                <th>-</th>
+                                <th>298.58</th>
+                                <th>18:05:02</th>
+                                <th>Open</th>
+                            </tr>
+                            <tr>
+                                <th>0.80</th>
+                                <th>Yes</th>
+                                <th>201.45</th>
+                                <th>02:03:50</th>
+                                <th>Closed</th>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!-- /.table-responsive -->
             </div>
         </div>
         <!-- /#page-wrapper -->
