@@ -30,6 +30,22 @@
         <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
 
+
+    <!-- jQuery -->
+    <script src="/static/js/jquery.js"></script>
+
+    <!-- Bootstrap Core JavaScript -->
+    <script src="/static/js/bootstrap.min.js"></script>
+
+    <!-- Custom Theme JavaScript -->
+    <script src="/static/js/client-view.js"></script>
+
+    <!-- Flot -->
+    <script src="/static/js/vendor/flot/jquery.flot.min.js"></script>
+    <script src="/static/js/vendor/flot/jquery.flot.tooltip.min.js"></script>
+
+
+
 </head>
 
 <body>
@@ -357,10 +373,19 @@
                     <div class="order-book-place-holder"></div>
                 </div>
                 <div class="col-lg-7">
-                    <div class="row section-header">
-                        <h5>PRICE CHART</h5>
+                    <!--<div class="price-chart-container" style="display:none">-->
+                    <div class="price-chart-container">
+                        <div class="row section-header">
+                            <h5>PRICE CHART</h5>
+                        </div>
+                        <div class="price-chart-place-holder"></div>
                     </div>
-                    <div class="price-chart-place-holder"></div>
+                    <div class="depth-chart-container">
+                        <div class="row section-header">
+                            <h5>DEPTH CHART</h5>
+                        </div>
+                        <div class="depth-chart-place-holder"></div>
+                    </div>
                     <div class="row section-header">
                         <h5>OPEN ORDERS</h5>
                     </div>
@@ -401,14 +426,6 @@
     </div>
     <!-- /#wrapper -->
 
-    <!-- jQuery -->
-    <script src="/static/js/jquery.js"></script>
-
-    <!-- Bootstrap Core JavaScript -->
-    <script src="/static/js/bootstrap.min.js"></script>
-
-    <!-- Custom Theme JavaScript -->
-    <script src="/static/js/client-view.js"></script>
 
 </body>
 

@@ -28,6 +28,135 @@ $(function() {
     if (element.is('li')) {
         element.addClass('active');
     }
+
+    // flot charts
+    
+    var priceContainer = $(".price-chart-place-holder");
+    var depthContainer = $(".depth-chart-place-holder");
+    var maximum = priceContainer.outerWidth() / 2 || 300;
+
+    priceSeries = [{
+        data: null,
+        lines: {
+            fill: true,
+            fillColor: { colors: [{opacity: 0.1},{opacity: 0.5}]},
+            show: true
+        },
+        label: 'Price'
+    }];
+
+    var plotPrice = $.plot(priceContainer, priceSeries, { 
+        grid: {
+            borderWidth: 1,
+            minBorderMargin: 20,
+            labelMargin: 10,
+            margin: {
+                top: 8,
+                bottom: 20,
+                left: 20
+            },
+            markings: function(axes) {
+                var markings = [];
+                var xaxis = axes.xaxis;
+                for (var x = Math.floor(xaxis.min); x < xaxis.max; x += xaxis.tickSize * 2) {
+                    markings.push({
+                        xaxis: {
+                            from: x,
+                            to: x + xaxis.tickSize
+                        },
+                        color: "rgba(232, 232, 255, 0.01)"
+                    });
+                }
+                return markings;
+            },
+            hoverable: true
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: "Date: %x, USD: $%y"
+        },
+        legend: {
+            show: false
+        },
+        colors: [
+          //"#FF7070"
+          '#FF9939'
+        ]
+    });
+
+    depthSeries = [{
+        data: null,
+        lines: {
+            fill: true,
+            fillColor: { colors: [{opacity: 0.1},{opacity: 0.5}]},
+            show: true
+        },
+        label: 'Buy Depth'
+    }, {
+        data: null,
+        lines: {
+            fill: true,
+            fillColor: { colors: [{opacity: 0.1},{opacity: 0.5}]},
+            show: true
+        },
+        label: 'Sell Depth'
+
+    }];
+
+    var plotDepth = $.plot(depthContainer, depthSeries, { 
+        grid: {
+            borderWidth: 1,
+            minBorderMargin: 20,
+            labelMargin: 10,
+            margin: {
+                top: 8,
+                bottom: 20,
+                left: 20
+            },
+            markings: function(axes) {
+                var markings = [];
+                var xaxis = axes.xaxis;
+                for (var x = Math.floor(xaxis.min); x < xaxis.max; x += xaxis.tickSize * 2) {
+                    markings.push({
+                        xaxis: {
+                            from: x,
+                            to: x + xaxis.tickSize
+                        },
+                        color: "rgba(232, 232, 255, 0.01)"
+                    });
+                }
+                return markings;
+            },
+            hoverable: true
+        },
+        tooltip: true,
+        tooltipOpts: {
+            content: "USD: $%x, BTC: %y"
+        },
+        legend: {
+            show: false
+        },
+        colors: [
+          "#84F766",
+          "#FF6939"
+        ]
+    });
+
+    setInterval(function updateRandom() {
+        $.getJSON('/exchange/pricechart', function(data) {
+            priceSeries[0].data = data;
+            plotPrice.setData(priceSeries);
+            plotPrice.setupGrid();
+            plotPrice.draw();
+        });
+        $.getJSON('/exchange/depthchart', function(data) {
+            depthSeries[0].data = data[0];
+            depthSeries[1].data = data[1];
+            plotDepth.setData(depthSeries);
+            plotDepth.setupGrid();
+            plotDepth.draw();
+        });
+    }, 1000);
 });
 
 
@@ -96,8 +225,3 @@ var calcSellingCredit = function (btc_amount, selling_price) {
 $('#sell-btn').click(function (e) {
 
 });
-
-
-
-
-

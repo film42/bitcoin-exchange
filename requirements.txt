@@ -8,3 +8,4 @@ ipython==2.4.1
 six==1.9.0
 wsgiref==0.1.2
 model-mommy==1.2.3
+requests==2.2.1
