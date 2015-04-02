@@ -17,4 +17,6 @@ urlpatterns = patterns('',
                        url(r'^home/', views.home, name='Home'),
                        url(r'^client/', views.client, name='Client'),
                        url(r'^login/', views.login, name='Login'),
+                       url(r'^pricechart/', views.price_chart, name='Price Chart'),
+                       url(r'^depthchart/', views.depth_chart, name='Depth Chart'),
 )

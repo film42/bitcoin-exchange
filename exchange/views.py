@@ -44,3 +44,21 @@ def login(request):
     template = loader.get_template('exchange/login.html')
     context = RequestContext(request, {})
     return HttpResponse(template.render(context))
+
+
+def price_chart(request):
+    json = get_price_chart()
+    return HttpResponse(json)
+
+
+def depth_chart(request):
+    json = get_depth_chart()
+    return HttpResponse(json)
+
+
+def get_depth_chart():
+    return '[[[0,30],[6,15],[11,9],[19,3],[27,0]],[[28,0],[35,3],[42,9],[49,15],[58,30]]]'
+
+
+def get_price_chart():
+    return '[[0,0],[3, 6],[9, 11],[15, 19],[30, 27]]'
