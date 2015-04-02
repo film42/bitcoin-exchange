@@ -4,6 +4,7 @@ from django.template import RequestContext, loader
 from models import *
 from rest_framework import viewsets
 from serializers import OrderSerializer, TradeSerializer, ExchangeSerializer, AccountSerializer
+#import requests
 
 # Create your views here.
 
@@ -57,6 +58,7 @@ def depth_chart(request):
 
 
 def get_depth_chart():
+    #response = requests.get('https://darkpool.herokuapp.com/snapshot')
     return '[[[0,30],[6,15],[11,9],[19,3],[27,0]],[[28,0],[35,3],[42,9],[49,15],[58,30]]]'
 
 
