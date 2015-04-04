@@ -1,0 +1,18 @@
+<table class="order-book-table">
+  <thead>
+    <tr><td>Market size</td><td>Price(USD)</td></tr>
+  </thead>
+  <tbody>
+  {% for order in sell_orders %}
+    <tr><td class="quantity-td">{{ order.0 }}</td><td class="price-td">{{ order.1 }}<td></tr>
+  {% endfor %}
+  </tbody>
+</table>
+<p>{{ spread }} USD SPREAD</p>
+<table>
+  <tbody>
+  {% for order in buy_orders %}
+    <tr><td class="quantity-td">{{ order.0 }}</td><td class="price-td">{{ order.1 }}<td></tr>
+  {% endfor %}
+  </tbody>
+</table>

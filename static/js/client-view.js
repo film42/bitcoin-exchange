@@ -156,6 +156,7 @@ $(function() {
             plotDepth.setupGrid();
             plotDepth.draw();
         });
+        $(".order-book-place-holder").load("/exchange/orderbook");
     }, 1000);
 });
 
@@ -192,8 +193,8 @@ $('#buy-btn').click(function (e) {
             amount:btc_amount,
             price:buying_price
         }
-        var url = "https://ourdomain/buy";
-        $.post( url, JSON.stringify(buy_request), function (response) {
+        var url = "/exchange/buy";
+        $.post(url, JSON.stringify(buy_request), function (response) {
             // crate an open order
         })
     }
@@ -223,5 +224,18 @@ var calcSellingCredit = function (btc_amount, selling_price) {
 };
 
 $('#sell-btn').click(function (e) {
+    var btc_amount = $('#btc-sell-amount').val();
+    var price = $('#btc-sell-price-amount').val();
 
+    if(btc_amount != 0 && price != 0 && !isNaN(btc_amount) && !isNaN(price)) {
+        var request = {
+            //id: some session var?
+            amount:btc_amount,
+            price:price
+        }
+        var url = "/exchange/sell";
+        $.post(url, JSON.stringify(request), function (response) {
+            // crate an open order
+        })
+    }
 });
