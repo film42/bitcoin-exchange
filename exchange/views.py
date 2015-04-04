@@ -63,7 +63,7 @@ def get_depth_chart():
     json = requests.get('https://darkpool.herokuapp.com/snapshot').json()
     for buy in json['buyBook']:
       buys.append([buy['threshold'], buy['quantity']])
-    for sell in json['sellOrder']:
+    for sell in json['sellBook']:
       sells.append([sell['threshold'], sell['quantity']])
     return str([buys, sells])
     #return '[[[0,30],[6,15],[11,9],[19,3],[27,0]],[[28,0],[35,3],[42,9],[49,15],[58,30]]]'
