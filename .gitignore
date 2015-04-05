@@ -1,4 +1,5 @@
 db.sqlite3
+celerybeat-schedule.db
 *.pyc
 bitcoin_exchange/settings.py
 .idea/
