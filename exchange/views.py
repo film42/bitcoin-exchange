@@ -75,7 +75,7 @@ def get_orders():
     json = requests.get('https://darkpool.herokuapp.com/snapshot').json()
     for buy in json['buyBook']:
       buys.append([buy['threshold'], buy['quantity']])
-    for sell in json['sellOrder']:
+    for sell in json['sellBook']:
       sells.append([sell['threshold'], sell['quantity']])
     # for now we just need it to work (we should fail later if no data is returned)
     if not sells:

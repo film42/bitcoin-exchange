@@ -30,7 +30,7 @@ $(function() {
     }
 
     // flot charts
-    
+
     var priceContainer = $(".price-chart-place-holder");
     var depthContainer = $(".depth-chart-place-holder");
     var maximum = priceContainer.outerWidth() / 2 || 300;
@@ -45,7 +45,7 @@ $(function() {
         label: 'Price'
     }];
 
-    var plotPrice = $.plot(priceContainer, priceSeries, { 
+    var plotPrice = $.plot(priceContainer, priceSeries, {
         grid: {
             borderWidth: 1,
             minBorderMargin: 20,
@@ -103,7 +103,7 @@ $(function() {
 
     }];
 
-    var plotDepth = $.plot(depthContainer, depthSeries, { 
+    var plotDepth = $.plot(depthContainer, depthSeries, {
         grid: {
             borderWidth: 1,
             minBorderMargin: 20,
@@ -157,7 +157,7 @@ $(function() {
             plotDepth.draw();
         });
         $(".order-book-place-holder").load("/exchange/orderbook");
-    }, 1000);
+    }, 3000);
 });
 
 
