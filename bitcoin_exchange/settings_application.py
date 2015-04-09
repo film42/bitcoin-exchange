@@ -25,6 +25,10 @@ INSTALLED_APPS = (
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django_extensions',
+    'rest_framework',
+    'djcelery',
+    'kombu.transport.django',
     'exchange',
 )
 
@@ -43,17 +47,6 @@ ROOT_URLCONF = 'bitcoin_exchange.urls'
 WSGI_APPLICATION = 'bitcoin_exchange.wsgi.application'
 
 AUTH_USER_MODEL = 'exchange.User'
-
-
-# Database
-# https://docs.djangoproject.com/en/1.7/ref/settings/#databases
-
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-    }
-}
 
 # Template directory
 
