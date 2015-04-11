@@ -116,7 +116,7 @@ def add_order(request):
 
 def open_orders(request):
     [user] = User.objects.filter(username="demo")
-    all_orders = user.order_set.all()
+    all_orders = user.order_set.order_by('created_at')
     template = loader.get_template('exchange/open-orders.html')
     context = RequestContext(request, {"all_orders": all_orders})
     return HttpResponse(template.render(context))
@@ -124,13 +124,11 @@ def open_orders(request):
 
 def order_book(request):
     template = loader.get_template('exchange/order-book.html')
-    buy_orders, sell_orders = get_orders()
+    buy_orders, sell_orders, spread = get_orders()
     # sort the orders so that the spread is in the middle
     buy_orders = sorted(buy_orders, key=lambda order: order[1])
     sell_orders = sorted(sell_orders, key=lambda order: order[1], reverse=True)
-    # calculate the spread
-    spread = min(order[1] for order in sell_orders) - max(order[1] for order in buy_orders)
-    context = RequestContext(request, {'buy_orders': buy_orders[:20], 'sell_orders': sell_orders[-20:], 'spread': spread})
+    context = RequestContext(request, {'buy_orders': buy_orders[:30], 'sell_orders': sell_orders[-30:], 'spread': spread})
     return HttpResponse(template.render(context))
 
 
@@ -138,6 +136,7 @@ def get_orders():
     buys = []
     sells = []
     json = requests.get('https://darkpool.herokuapp.com/snapshot').json()
+    spread = json['spread']
     for buy in json['buyBook']:
       buys.append([buy['threshold'], buy['quantity']])
     for sell in json['sellBook']:
@@ -147,7 +146,7 @@ def get_orders():
         sells = [[0.0, 0.0]]
     if not buys:
         buys = [[0.0, 0.0]]
-    return buys, sells
+    return buys, sells, spread
 
 
 def get_depth_chart():
