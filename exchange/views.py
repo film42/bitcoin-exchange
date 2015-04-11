@@ -1,10 +1,12 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 from django.template import RequestContext, loader
-from models import *
+from models import Order, Account, User, Trade, Exchange
+from models import TradeTypes, SideTypes, CurrencyTypes, FilledStatusTypes
 from rest_framework import viewsets
 from serializers import OrderSerializer, TradeSerializer, ExchangeSerializer, AccountSerializer
 import requests
+import json
 
 # Create your views here.
 
@@ -56,8 +58,45 @@ def depth_chart(request):
     json = get_depth_chart()
     return HttpResponse(json)
 
+
 def add_order(request):
-    pass
+    [user] = User.objects.filter(username="demo")
+    form = json.load(request.body)
+
+    if form["side"] == "sell":
+        order = Order(order_type=SideTypes.SELL, user=user, amount=form["amount"])
+    else:
+        order = Order(order_type=SideTypes.BUY, user=user, amount=form["amount"])
+
+    if form["order_type"] == "limit":
+        order.order_type = TradeTypes.LIMIT
+        order.limit = float(form["limit"])
+    else:
+        order.order_type = TradeTypes.MARKET
+        order.limit = 0.0
+
+    if form["from_currency"] == "BTC":
+        order.from_currency = CurrencyTypes.BTC
+        order.to_currency = CurrencyTypes.USD
+    else:
+        order.from_currency = CurrencyTypes.USD
+        order.to_currency = CurrencyTypes.BTC
+
+    order.save()
+
+    order_json = {
+        "orderType": form["side"],
+        "orderQuantity": order.amount,
+        "orderId": str(order.guid),
+        "accountId": str(user.guid)
+    }
+
+    if order.order_type == TradeTypes.LIMIT:
+        order_json["orderThreshold"] = order.limit
+
+    requests.post("https://darkpool.herokuapp.com/orders/add", data=json.dumps(order_json))
+
+    return HttpResponse("{}")
 
 
 def open_orders(request):
