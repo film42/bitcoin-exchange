@@ -57,20 +57,15 @@ auth_models.User = User
 
 
 class Order(BaseModel):
+    user = models.ForeignKey('User')
     order_type = models.CharField(max_length=1, choices=TradeTypes.choices())
     guid = UUIDField(auto=True)
     side = models.CharField(max_length=1, choices=SideTypes.choices())
-    amount = models.DecimalField(max_digits=15,
-                                 decimal_places=8)  # up to 1,000,000
-    limit = models.DecimalField(max_digits=13,
-                                decimal_places=8)  # up to 10,000
+    amount = models.DecimalField(max_digits=15, decimal_places=8)  # up to 1,000,000
+    limit = models.DecimalField(max_digits=13, decimal_places=8)  # up to 10,000
     from_currency = models.CharField(max_length=3, choices=CurrencyTypes.choices())
-    to_currency = models.CharField(max_length=3,
-                                   choices=CurrencyTypes.choices())  # it should not be possible for the from currency to equal the to currency
-
-    def __unicode__(self):
-        return "id: " + str(self.id) + " " + "\nOrder type: " + TradeTypes.choices()[int(self.order_type)][
-            1] + " " + "\nside: " + SideTypes.choices()[int(self.side)][1] + " amount: " + str(self.amount)
+    # it should not be possible for the from currency to equal the to currency
+    to_currency = models.CharField(max_length=3, choices=CurrencyTypes.choices())
 
     class Meta:
         app_label = "exchange"
