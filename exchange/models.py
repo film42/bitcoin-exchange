@@ -5,6 +5,7 @@ from django.utils.translation import ugettext_lazy as _
 from django.contrib.auth import models as auth_models
 from django.contrib.auth.models import AbstractUser
 
+from uuidfield import UUIDField
 from enum import Enum
 
 
@@ -57,6 +58,7 @@ auth_models.User = User
 
 class Order(BaseModel):
     order_type = models.CharField(max_length=1, choices=TradeTypes.choices())
+    guid = UUIDField(auto=True)
     side = models.CharField(max_length=1, choices=SideTypes.choices())
     amount = models.DecimalField(max_digits=15,
                                  decimal_places=8)  # up to 1,000,000
@@ -81,6 +83,7 @@ class Trade(BaseModel):
     # the amount each unit from the buy_order will cost, expressed in terms of the sell currency
     rate = models.DecimalField(max_digits=15,
                                decimal_places=8)  # up to 1,000,000
+    guid = UUIDField(auto=True)
     buy_order = models.ForeignKey('Order', related_name="buy_order")
     sell_order = models.ForeignKey('Order', related_name="sell_order")
     filled = models.BooleanField(default=False)
@@ -115,6 +118,7 @@ class ExchangeSecurity(BaseModel):
 
 class Account(BaseModel):
     user = models.ForeignKey('User')
+    guid = UUIDField(auto=True)
     currency_type = models.CharField(max_length=3, choices=CurrencyTypes.choices())
     balance = models.DecimalField(max_digits=15, decimal_places=8)
 
