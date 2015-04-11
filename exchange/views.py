@@ -61,6 +61,7 @@ def depth_chart(request):
 
 def add_order(request):
     [user] = User.objects.filter(username="demo")
+
     form = json.load(request.body)
 
     if form["side"] == "sell":
@@ -83,6 +84,11 @@ def add_order(request):
         order.to_currency = CurrencyTypes.BTC
 
     order.save()
+
+    # Doesn't work for market orders
+    # [account] = Account.objects.filter(currency_type=order.from_currency)
+    # account.balance = account.balance - order.limit
+    # account.save()
 
     order_json = {
         "orderType": form["side"],
