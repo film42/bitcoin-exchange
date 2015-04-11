@@ -53,7 +53,7 @@ auth_models.User = User
 class Order(BaseModel):
     user = models.ForeignKey('User')
     order_type = enum.EnumField(TradeTypes)
-    guid = UUIDField(auto=True)
+    guid = UUIDField(auto=True, hyphenate=True)
     side = enum.EnumField(SideTypes)
     amount = models.DecimalField(max_digits=15, decimal_places=8)  # up to 1,000,000
     limit = models.DecimalField(max_digits=13, decimal_places=8)  # up to 10,000
@@ -72,7 +72,7 @@ class Order(BaseModel):
 class Trade(BaseModel):
     # the amount each unit from the buy_order will cost, expressed in terms of the sell currency
     rate = models.DecimalField(max_digits=15, decimal_places=8)  # up to 1,000,000
-    guid = UUIDField(auto=True)
+    guid = UUIDField(auto=True, hyphenate=True)
     buy_order = models.ForeignKey('Order', related_name="buy_order")
     sell_order = models.ForeignKey('Order', related_name="sell_order")
     filled = models.BooleanField(default=False)
@@ -107,7 +107,7 @@ class ExchangeSecurity(BaseModel):
 
 class Account(BaseModel):
     user = models.ForeignKey('User')
-    guid = UUIDField(auto=True)
+    guid = UUIDField(auto=True, hyphenate=True)
     currency_type = enum.EnumField(CurrencyTypes)
     balance = models.DecimalField(max_digits=15, decimal_places=8)
 

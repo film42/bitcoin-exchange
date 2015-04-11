@@ -1,0 +1,61 @@
+[
+    {
+        "fields": {
+            "username": "demo",
+            "first_name": "Mario",
+            "last_name": "Sanchez",
+            "is_active": true,
+            "is_superuser": false,
+            "is_staff": false,
+            "last_login": "2015-04-11T02:07:57.005Z",
+            "groups": [],
+            "user_permissions": [],
+            "password": "",
+            "email": "demo@example.com",
+            "date_joined": "2015-04-11T02:07:57.005Z"
+        },
+        "model": "exchange.user",
+        "pk": 2
+    },
+    {
+        "fields": {
+            "to_currency": 0,
+            "status": 0,
+            "order_type": 0,
+            "created_at": "2015-04-11T03:14:40.346Z",
+            "modified_at": "2015-04-11T03:14:40.346Z",
+            "amount": "0.3",
+            "limit": "20.23",
+            "user": 2,
+            "from_currency": 1,
+            "guid": "b38d72a7-9613-4da2-9d19-2d5b57018830",
+            "side": 0
+        },
+        "model": "exchange.order",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "balance": "4.1223",
+            "created_at": "2015-04-11T03:14:49.809Z",
+            "modified_at": "2015-04-11T03:14:49.809Z",
+            "currency_type": 1,
+            "user": 2,
+            "guid": "a994ed55-f26c-4a2e-b538-6b892717e0c2"
+        },
+        "model": "exchange.account",
+        "pk": 1
+    },
+    {
+        "fields": {
+            "balance": "123.32",
+            "created_at": "2015-04-11T03:15:13.256Z",
+            "modified_at": "2015-04-11T03:15:13.256Z",
+            "currency_type": 0,
+            "user": 2,
+            "guid": "78c5fb53-f9b3-4a70-840e-336ef79c1579"
+        },
+        "model": "exchange.account",
+        "pk": 2
+    }
+]
