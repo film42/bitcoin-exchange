@@ -192,6 +192,10 @@ body {
     margin-right: -10px;
 }
 
+.account-actions-p {
+    margin: 8px 0 8px;
+}
+
 .tab-active {
     background-color: @gray-light;
 }
@@ -243,7 +247,6 @@ body {
 .price-chart-place-holder {
     width: 100%;
     height: 300px;
-    /*background: url(../img/price-chart.png) no-repeat center center scroll;*/
 }
 
 .depth-chart-place-holder {
@@ -252,9 +255,8 @@ body {
 }
 
 .order-book-place-holder {
-    width: 100%;
-    height: 800px;
-    /*background: url(../img/order-book.png) no-repeat center center scroll;*/
+    //width: 100%;
+    //height: 800px;
 }
 
 // Table
@@ -276,6 +278,52 @@ body {
 .table-responsive {
     margin-left: -15px;
     margin-right: -15px;
+}
+
+// Order Book Table
+.ob-sell-table {
+    font-size: 12px;
+    margin-bottom: 10px;
+}
+
+.ob-sell-table > thead > tr > th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.ob-sell-table > tbody > tr > th {
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: hidden;
+    font-weight: bold;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.ob-buy-table {
+    font-size: 12px;
+    border: hidden;
+    margin-top: 10px;
+    padding-left: 20px;
+}
+
+.ob-buy-table > thead > tr > th {
+    vertical-align: middle;
+    text-align: center;
+}
+
+.ob-buy-table > tbody > tr > th {
+    vertical-align: middle;
+    text-align: center;
+    border-bottom: hidden;
+    font-weight: bold;
+    padding-top: 1px;
+    padding-bottom: 1px;
+}
+
+.spread {
+    float: right;
+    margin-right: 20px;
 }
 
 // Buttons

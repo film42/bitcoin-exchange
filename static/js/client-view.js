@@ -157,7 +157,7 @@ $(function() {
             plotDepth.draw();
         });
         $(".order-book-place-holder").load("/exchange/orderbook");
-    }, 3000);
+    }, 30000);
 });
 
 
