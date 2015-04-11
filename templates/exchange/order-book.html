@@ -1,0 +1,29 @@
+<div class="table-responsive">
+  <table class="table ob-sell-table order-book-table">
+    <thead>
+      <tr><th>Market size</th><th>Price(USD)</th></tr>
+    </thead>
+    <tbody>
+    {% for order in sell_orders %}
+     <tr><th class="quantity-td">{{ order.0 }}</th><th class="price-td">{{ order.1 }}<th></tr>
+    {% endfor %}
+    </tbody>
+  </table>
+</div>
+<div class="">
+  <hr/>
+  <p style="text-align: right;margin-right: 40px;margin-bottom: 0">{{ spread }} USD SPREAD</p>
+  <hr/>
+</div>
+<div class="table-responsive">
+  <table class="table ob-buy-table order-book-table">
+    <tbody>
+    {% for order in buy_orders %}
+    <tr><th class="quantity-td">{{ order.0 }}</th><th class="price-td">{{ order.1 }}<th></tr>
+    {% endfor %}
+    </tbody>
+      <tfoot style="visibility: hidden">
+      <tr><th>Market size</th><th>Price(USD)</th></tr>
+    </tfoot>
+  </table>
+</div>

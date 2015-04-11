@@ -1,0 +1,27 @@
+<div class="table-responsive">
+    <table class="table">
+        <thead>
+        <tr>
+            <th>Side</th>
+            <th>Order Type</th>
+            <th>Size</th>
+            <th>Limit Price(USD)</th>
+            <th>Time</th>
+            <th>Status</th>
+        </tr>
+        </thead>
+        <tbody>
+        {% for order in all_orders %}
+        <tr>
+            <th>{{ order.side_as_string }}</th>
+            <th>{{ order.order_type_as_string }}</th>
+            <th>{{ order.amount|floatformat:4 }}</th>
+            <th>{{ order.limit|floatformat:4 }}</th>
+            <th>{{ order.created_at }}</th>
+            <th>{{ order.status_as_string }}</th>
+        </tr>
+        {% endfor %}
+        </tbody>
+    </table>
+</div>
+<!-- /.table-responsive -->

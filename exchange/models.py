@@ -8,13 +8,14 @@ from django_enumfield import enum
 
 from uuidfield import UUIDField
 
+
 class TradeTypes(enum.Enum):
     MARKET = 0
     LIMIT = 1
 
 
 class SideTypes(enum.Enum):
-    BUY= 0
+    BUY = 0
     SELL = 1
 
 
@@ -23,7 +24,7 @@ class CurrencyTypes(enum.Enum):
     BTC = 1
 
 
-# Can be not filled at all, partiall filled, or completely filled
+# Can be not filled at all, partially filled, or completely filled
 class FilledStatusTypes(enum.Enum):
     NONE = 0
     PARTIAL = 1
@@ -62,6 +63,29 @@ class Order(BaseModel):
     # it should not be possible for the from currency to equal the to currency
     to_currency = enum.EnumField(CurrencyTypes)
     status = enum.EnumField(FilledStatusTypes, default=FilledStatusTypes.NONE)
+
+    @property
+    def order_type_as_string(self):
+        if self.order_type == TradeTypes.LIMIT:
+            return "Limit"
+        else:
+            return "Market"
+
+    @property
+    def status_as_string(self):
+        if self.status == FilledStatusTypes.NONE:
+            return "Open"
+        elif self.status == FilledStatusTypes.PARTIAL:
+            return "Partially Filled"
+        else:
+            return "Filled"
+
+    @property
+    def side_as_string(self):
+        if self.side == SideTypes.BUY:
+            return "Buy"
+        else:
+            return "Sell"
 
     class Meta:
         app_label = "exchange"

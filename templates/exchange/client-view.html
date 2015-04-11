@@ -17,6 +17,9 @@
     <!-- Custom CSS -->
     <link href="/static/css/client-view.css" rel="stylesheet">
 
+    <!-- Favicon -->
+    <link rel="icon" href="/static/img/ico/favicon.ico" type="image/x-icon">
+
     <!-- Custom Fonts -->
     <link href="/static/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
 
@@ -262,7 +265,7 @@
                 <li class="dropdown">
                     <a class="dropdown-toggle" data-toggle="dropdown" href="#">
                         <!-- <i class="fa fa-user fa-fw"></i> -->
-                        Super User &nbsp; <i class="fa fa-caret-down"></i>
+                        Demo User &nbsp; <i class="fa fa-caret-down"></i>
                     </a>
                     <ul class="dropdown-menu dropdown-user">
                         <li><a href="#"><i class="fa fa-user fa-fw"></i> User Profile</a>
@@ -287,12 +290,11 @@
                         <h5>AVAILABLE BALANCE</h5>
                     </div>
                     <div class="row account-actions">
-                        <br>
                         <div class="col-lg-6">
-                            <p><i class="fa fa-arrow-up"></i><a class="link" href="" id="withdraw"> Withdraw</a></p>
+                            <p class="account-actions-p"><i class="fa fa-arrow-up"></i><a class="link" href="" id="withdraw"> Withdraw</a></p>
                         </div>
                         <div class="col-lg-6">
-                            <p><i class="fa fa-arrow-down"></i><a class="link" href="" id="deposit"> Deposit</a></p>
+                            <p class="account-actions-p"><i class="fa fa-arrow-down"></i><a class="link" href="" id="deposit"> Deposit</a></p>
                         </div>
                     </div>
                     <div class="row">
@@ -389,36 +391,8 @@
                     <div class="row section-header">
                         <h5>OPEN ORDERS</h5>
                     </div>
-                    <div class="table-responsive">
-                        <table class="table">
-                            <thead>
-                            <tr>
-                                <th>Size</th>
-                                <th>Filled</th>
-                                <th>Price(USD)</th>
-                                <th>Time</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            <tr>
-                                <th>1.20</th>
-                                <th>-</th>
-                                <th>298.58</th>
-                                <th>18:05:02</th>
-                                <th>Open</th>
-                            </tr>
-                            <tr>
-                                <th>0.80</th>
-                                <th>Yes</th>
-                                <th>201.45</th>
-                                <th>02:03:50</th>
-                                <th>Closed</th>
-                            </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                    <!-- /.table-responsive -->
+                    <div class="open-orders-place-holder"></div>
+                </div>
             </div>
         </div>
         <!-- /#page-wrapper -->

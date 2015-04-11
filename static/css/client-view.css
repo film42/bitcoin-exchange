@@ -138,6 +138,9 @@ body {
   border-bottom: 1px solid rgba(206, 210, 213, 0.15);
   margin-right: -10px;
 }
+.account-actions-p {
+  margin: 8px 0 8px;
+}
 .tab-active {
   background-color: #999999;
 }
@@ -180,22 +183,19 @@ body {
 .price-chart-place-holder {
   width: 100%;
   height: 300px;
-  /*background: url(../img/price-chart.png) no-repeat center center scroll;*/
 }
 .depth-chart-place-holder {
   width: 100%;
   height: 300px;
-}
-.order-book-place-holder {
-  width: 100%;
-  height: 800px;
-  background: url(../img/order-book.png) no-repeat center center scroll;
 }
 .table {
   font-size: 12px;
 }
 .table > thead > tr > th {
   vertical-align: middle;
+  border-bottom: 1px solid rgba(206, 210, 213, 0.15);
+}
+.table > thead > tr {
   border-bottom: 1px solid rgba(206, 210, 213, 0.15);
 }
 .table > tbody > tr > th {
@@ -206,6 +206,46 @@ body {
 .table-responsive {
   margin-left: -15px;
   margin-right: -15px;
+}
+.ob-sell-table {
+  font-size: 12px;
+  margin-bottom: 0px;
+}
+.ob-sell-table > thead > tr > th {
+  vertical-align: middle;
+  text-align: center;
+}
+.ob-sell-table > tbody > tr > th {
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: hidden;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+.ob-buy-table {
+  font-size: 12px;
+  border: hidden;
+  margin-top: 0px;
+  padding-left: 20px;
+}
+.ob-buy-table > thead > tr > th {
+  vertical-align: middle;
+  text-align: center;
+}
+.ob-buy-table > tbody > tr > th {
+  vertical-align: middle;
+  text-align: center;
+  border-bottom: hidden;
+  font-weight: bold;
+  padding-top: 1px;
+  padding-bottom: 1px;
+}
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 0;
+  border-top: 2px solid rgba(206, 210, 213, 0.15);
 }
 .btn-custom {
   color: #222222;

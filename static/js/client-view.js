@@ -156,72 +156,134 @@ $(function() {
             plotDepth.setupGrid();
             plotDepth.draw();
         });
+        $(".order-book-place-holder").load("/exchange/orderbook");
+        $(".open-orders-place-holder").load("/exchange/openorders");
     }, 3000);
 });
 
-
-/* buying */
-
-$('#btc-buy-amount').keyup(function (e) {
-    var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
-    $('#btc-buy-cost').html(cost);
-});
-
-$('#btc-buy-price-amount').keyup(function (e) {
-    var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
-    $('#btc-buy-cost').html(cost);
-});
-
-var calcBuyingCost = function (btc_amount, asking_price) {
-    if(btc_amount != 0 && asking_price != 0 && !isNaN(btc_amount) && !isNaN(asking_price)) {
-        var cost = btc_amount * asking_price;
-        return cost.toFixed(2);
-    }
-    else {
-        return 0;
-    }
-};
-
-$('#buy-btn').click(function (e) {
-    var btc_amount = $('#btc-buy-amount').val();
-    var buying_price = $('#btc-buy-price-amount').val();
-
-    if(btc_amount != 0 && buying_price != 0 && !isNaN(btc_amount) && !isNaN(buying_price)) {
-        var buy_request = {
-            //id: some session var?
-            amount:btc_amount,
-            price:buying_price
-        }
-        var url = "https://ourdomain/buy";
-        $.post( url, JSON.stringify(buy_request), function (response) {
-            // crate an open order
+$(function () {
+    /* updating the balance */
+    $('#btc-balance').load(function (e) {
+        $.getJSON('exchange/balance/usd/', function (data) {
+            $('#btc-balance').html(data.btc_balance);
         })
-    }
-
+    })
 });
 
-/* selling */
+$(function () {
 
-$('#btc-sell-amount').keyup(function (e) {
-    var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
-    $('#btc-sell-credit').html(cost);
-});
+    var createOrder = function (type, amount, limit) {
+        if(type == 'buy') {
+            if(limit == '') {
+                return {
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: 0,
+                    order_type: "market",
+                    from_currency: "USD"
+                }
+            }
+            else {
+                return {
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: parseFloat(limit),
+                    order_type: "limit",
+                    from_currency: "USD"
+                }
+            }
+        }
+        else {
+            if(limit == '') {
+                return {
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: 0,
+                    order_type: "market",
+                    from_currency: "BTC"
+                }
+            }
+            else {
+                return {
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: parseFloat(limit),
+                    order_type: "limit",
+                    from_currency: "BTC"
+                }
+            }
+        }
+    };
 
-$('#btc-sell-price-amount').keyup(function (e) {
-    var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
-    $('#btc-sell-credit').html(cost);
-});
+    /* buying */
 
-var calcSellingCredit = function (btc_amount, selling_price) {
-    if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
-        var cost = btc_amount * selling_price;
-        return cost.toFixed(2);
-    }
-    else {
-        return 0;
-    }
-};
+    $('#btc-buy-amount').keyup(function (e) {
+        console.log("why?");
+        var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
+        $('#btc-buy-cost').html(cost);
+    });
 
-$('#sell-btn').click(function (e) {
+    $('#btc-buy-price-amount').keyup(function (e) {
+        var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
+        $('#btc-buy-cost').html(cost);
+    });
 
+    var calcBuyingCost = function (btc_amount, asking_price) {
+        if(btc_amount != 0 && asking_price != 0 && !isNaN(btc_amount) && !isNaN(asking_price)) {
+            var cost = btc_amount * asking_price;
+            return cost.toFixed(2);
+        }
+        else {
+            return 0;
+        }
+    };
+
+    $('#buy-btn').click(function (e) {
+        var btc_amount = $('#btc-buy-amount').val();
+        var buying_price = $('#btc-buy-price-amount').val();
+
+        if(btc_amount != 0 && !isNaN(btc_amount)) {
+            var buy_order = createOrder('buy', btc_amount, buying_price);
+            var url = "/exchange/addorder/";
+            $.post( url, JSON.stringify(buy_order), function (response) {
+                console.log("Order submitted to Dark Pool");
+            })
+        }
+    });
+
+    /* selling */
+
+    $('#btc-sell-amount').keyup(function (e) {
+        var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
+        $('#btc-sell-credit').html(cost);
+    });
+
+    $('#btc-sell-price-amount').keyup(function (e) {
+        var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
+        $('#btc-sell-credit').html(cost);
+    });
+
+    var calcSellingCredit = function (btc_amount, selling_price) {
+        if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
+            var cost = btc_amount * selling_price;
+            return cost.toFixed(2);
+        }
+        else {
+            return 0;
+        }
+    };
+
+    $('#sell-btn').click(function (e) {
+        var btc_amount = $('#btc-sell-amount').val();
+        var selling_price = $('#btc-sell-price-amount').val();
+
+        if(btc_amount != 0 && !isNaN(btc_amount)) {
+            var sell_order = createOrder('sell', btc_amount, selling_price);
+            var url = "/exchange/addorder/";
+            $.post( url, JSON.stringify(sell_order), function (response) {
+                console.log("Order submitted to Dark Pool");
+            })
+        }
+
+    });
 });
