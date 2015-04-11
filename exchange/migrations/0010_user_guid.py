@@ -15,7 +15,7 @@ class Migration(migrations.Migration):
         migrations.AddField(
             model_name='user',
             name='guid',
-            field=uuidfield.fields.UUIDField(unique=True, max_length=32, editable=False, blank=True),
+            field=uuidfield.fields.UUIDField(unique=True, max_length=32, editable=False, blank=False),
             preserve_default=True,
         ),
     ]
