@@ -5,6 +5,7 @@ from models import Order, Account, User, Trade, Exchange
 from models import TradeTypes, SideTypes, CurrencyTypes, FilledStatusTypes
 from rest_framework import viewsets
 from serializers import OrderSerializer, TradeSerializer, ExchangeSerializer, AccountSerializer
+from StringIO import StringIO
 import requests
 import json
 
@@ -61,17 +62,17 @@ def depth_chart(request):
 
 def add_order(request):
     [user] = User.objects.filter(username="demo")
-
-    form = json.load(request.body)
+    json_io = StringIO(request.body)
+    form = json.load(json_io)
 
     # ASSUMPTIONS:
     # 1) Amount is always in BTC
     # 2) Limit is always in USD
 
     if form["side"] == "sell":
-        order = Order(order_type=SideTypes.SELL, user=user, amount=form["amount"])
+        order = Order(side=SideTypes.SELL, user=user, amount=form["amount"])
     else:
-        order = Order(order_type=SideTypes.BUY, user=user, amount=form["amount"])
+        order = Order(side=SideTypes.BUY, user=user, amount=form["amount"])
 
     if form["order_type"] == "limit":
         order.order_type = TradeTypes.LIMIT
@@ -104,9 +105,13 @@ def add_order(request):
     if order.order_type == TradeTypes.LIMIT:
         order_json["orderThreshold"] = order.limit
 
-    requests.post("https://darkpool.herokuapp.com/orders/add", data=json.dumps(order_json))
+    headers = {
+        'content-type': 'application/json',
+        'accept': 'application/json'
+    }
+    r = requests.post("https://darkpool.herokuapp.com/orders/add", data=json.dumps(order_json), headers=headers)
 
-    return HttpResponse("{}")
+    return HttpResponse(r.content)
 
 
 def open_orders(request):

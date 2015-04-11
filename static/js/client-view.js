@@ -172,42 +172,44 @@ $(function () {
 
 $(function () {
 
-    var createOrder = function (type, amount, quantity) {
+    var createOrder = function (type, amount, limit) {
         if(type == 'buy') {
-            if(amount == 0) {
+            if(limit == '') {
                 return {
-                    orderType: "buy",
-                    orderQuantity: quantity,
-                    orderId: "5eb5576d-d983-4073-9574-0d10de9a657a",
-                    accountId: "41bff678-1963-4a2b-9121-6b4e514504df"
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: 0,
+                    order_type: "market",
+                    from_currency: "USD"
                 }
             }
             else {
                 return {
-                    orderType : "buy",
-                    orderQuantity : quantity,
-                    orderThreshold : amount,
-                    orderId : "5eb5576d-d983-4073-9574-0d10de9a657a",
-                    accountId : "41bff678-1963-4a2b-9121-6b4e514504df"
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: parseFloat(limit),
+                    order_type: "limit",
+                    from_currency: "USD"
                 }
             }
         }
         else {
-            if(amount = 0) {
+            if(limit == '') {
                 return {
-                    orderType : "sell",
-                    orderQuantity : amount,
-                    orderId : "5eb5576d-d983-4073-9574-0d10de9a657a",
-                    accountId : "41bff678-1963-4a2b-9121-6b4e514504df"
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: 0,
+                    order_type: "market",
+                    from_currency: "BTC"
                 }
             }
             else {
                 return {
-                    orderType : "sell",
-                    orderQuantity : quantity,
-                    orderThreshold : amount,
-                    orderId : "5eb5576d-d983-4073-9574-0d10de9a657a",
-                    accountId : "41bff678-1963-4a2b-9121-6b4e514504df"
+                    side: type,
+                    amount: parseFloat(amount),
+                    limit: parseFloat(limit),
+                    order_type: "limit",
+                    from_currency: "BTC"
                 }
             }
         }
@@ -242,11 +244,9 @@ $(function () {
 
         if(btc_amount != 0 && !isNaN(btc_amount)) {
             var buy_order = createOrder('buy', btc_amount, buying_price);
-            var url = "https://darkpool.herokuapp.com/orders/add";
+            var url = "/exchange/addorder/";
             $.post( url, JSON.stringify(buy_order), function (response) {
-                if(response.success == "Order Added") {
-                    $('#buy-btn').fadeOut();
-                }
+                console.log("Order submitted to Dark Pool");
             })
         }
     });
@@ -276,14 +276,14 @@ $(function () {
     $('#sell-btn').click(function (e) {
         var btc_amount = $('#btc-sell-amount').val();
         var selling_price = $('#btc-sell-price-amount').val();
-        if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
+
+        if(btc_amount != 0 && !isNaN(btc_amount)) {
             var sell_order = createOrder('sell', btc_amount, selling_price);
-            var url = "https://darkpool.herokuapp.com/orders/add";
+            var url = "/exchange/addorder/";
             $.post( url, JSON.stringify(sell_order), function (response) {
-                if(response.success == "Order Added") {
-                    $('#sell-btn').fadeOut();
-                }
+                console.log("Order submitted to Dark Pool");
             })
         }
+
     });
 });

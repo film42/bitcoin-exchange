@@ -8,13 +8,14 @@ from django_enumfield import enum
 
 from uuidfield import UUIDField
 
+
 class TradeTypes(enum.Enum):
     MARKET = 0
     LIMIT = 1
 
 
 class SideTypes(enum.Enum):
-    BUY= 0
+    BUY = 0
     SELL = 1
 
 
@@ -23,7 +24,7 @@ class CurrencyTypes(enum.Enum):
     BTC = 1
 
 
-# Can be not filled at all, partiall filled, or completely filled
+# Can be not filled at all, partially filled, or completely filled
 class FilledStatusTypes(enum.Enum):
     NONE = 0
     PARTIAL = 1
@@ -78,6 +79,13 @@ class Order(BaseModel):
             return "Partially Filled"
         else:
             return "Filled"
+
+    @property
+    def side_as_string(self):
+        if self.side == SideTypes.BUY:
+            return "Buy"
+        else:
+            return "Sell"
 
     class Meta:
         app_label = "exchange"
