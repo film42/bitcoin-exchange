@@ -64,6 +64,10 @@ def add_order(request):
 
     form = json.load(request.body)
 
+    # ASSUMPTIONS:
+    # 1) Amount is always in BTC
+    # 2) Limit is always in USD
+
     if form["side"] == "sell":
         order = Order(order_type=SideTypes.SELL, user=user, amount=form["amount"])
     else:
@@ -106,8 +110,10 @@ def add_order(request):
 
 
 def open_orders(request):
+    [user] = User.objects.filter(username="demo")
+    all_orders = user.order_set.all()
     template = loader.get_template('exchange/open-orders.html')
-    context = RequestContext(request, {})
+    context = RequestContext(request, {"all_orders": all_orders})
     return HttpResponse(template.render(context))
 
 
@@ -119,7 +125,7 @@ def order_book(request):
     sell_orders = sorted(sell_orders, key=lambda order: order[1], reverse=True)
     # calculate the spread
     spread = min(order[1] for order in sell_orders) - max(order[1] for order in buy_orders)
-    context = RequestContext(request, { 'buy_orders': buy_orders, 'sell_orders': sell_orders, 'spread': spread })
+    context = RequestContext(request, {'buy_orders': buy_orders[:20], 'sell_orders': sell_orders[-20:], 'spread': spread})
     return HttpResponse(template.render(context))
 
 

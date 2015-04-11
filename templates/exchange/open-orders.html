@@ -2,28 +2,23 @@
     <table class="table">
         <thead>
         <tr>
+            <th>Order Type</th>
             <th>Size</th>
-            <th>Filled</th>
-            <th>Price(USD)</th>
+            <th>Limit Price(USD)</th>
             <th>Time</th>
             <th>Status</th>
         </tr>
         </thead>
         <tbody>
+        {% for order in all_orders %}
         <tr>
-            <th>1.20</th>
-            <th>-</th>
-            <th>298.58</th>
-            <th>18:05:02</th>
-            <th>Open</th>
+            <th>{{ order.order_type_as_string }}</th>
+            <th>{{ order.amount }}</th>
+            <th>{{ order.limit }}</th>
+            <th>{{ order.created_at }}</th>
+            <th>{{ order.status_as_string }}</th>
         </tr>
-        <tr>
-            <th>0.80</th>
-            <th>Yes</th>
-            <th>201.45</th>
-            <th>02:03:50</th>
-            <th>Closed</th>
-        </tr>
+        {% endfor %}
         </tbody>
     </table>
 </div>

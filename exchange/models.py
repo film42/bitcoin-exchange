@@ -63,6 +63,22 @@ class Order(BaseModel):
     to_currency = enum.EnumField(CurrencyTypes)
     status = enum.EnumField(FilledStatusTypes, default=FilledStatusTypes.NONE)
 
+    @property
+    def order_type_as_string(self):
+        if self.order_type == TradeTypes.LIMIT:
+            return "Limit"
+        else:
+            return "Market"
+
+    @property
+    def status_as_string(self):
+        if self.status == FilledStatusTypes.NONE:
+            return "Open"
+        elif self.status == FilledStatusTypes.PARTIAL:
+            return "Partially Filled"
+        else:
+            return "Filled"
+
     class Meta:
         app_label = "exchange"
         verbose_name = _('Order')
