@@ -4,6 +4,7 @@ from __future__ import unicode_literals
 from django.db import models, migrations
 import django.utils.timezone
 from django.conf import settings
+import uuidfield.fields
 import django.core.validators
 
 
@@ -44,6 +45,7 @@ class Migration(migrations.Migration):
                 ('id', models.AutoField(verbose_name='ID', serialize=False, auto_created=True, primary_key=True)),
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name=b'Created at')),
                 ('modified_at', models.DateTimeField(auto_now=True, verbose_name=b'Modified at')),
+                ('guid', uuidfield.fields.UUIDField(unique=True, max_length=32, editable=False, blank=True)),
                 ('currency_type', models.CharField(max_length=3, choices=[(b'1', b'BTC'), (b'0', b'USD')])),
                 ('balance', models.DecimalField(max_digits=15, decimal_places=8)),
                 ('user', models.ForeignKey(to=settings.AUTH_USER_MODEL)),
@@ -91,6 +93,7 @@ class Migration(migrations.Migration):
                 ('created_at', models.DateTimeField(auto_now_add=True, verbose_name=b'Created at')),
                 ('modified_at', models.DateTimeField(auto_now=True, verbose_name=b'Modified at')),
                 ('order_type', models.CharField(max_length=1, choices=[(b'1', b'Limit'), (b'0', b'Market')])),
+                ('guid', uuidfield.fields.UUIDField(unique=True, max_length=32, editable=False, blank=True)),
                 ('side', models.CharField(max_length=1, choices=[(b'0', b'Buy'), (b'1', b'Sell')])),
                 ('amount', models.DecimalField(max_digits=15, decimal_places=8)),
                 ('limit', models.DecimalField(max_digits=13, decimal_places=8)),
