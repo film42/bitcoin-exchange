@@ -157,21 +157,61 @@ $(function() {
             plotDepth.draw();
         });
         $(".order-book-place-holder").load("/exchange/orderbook");
-    }, 30000);
+        $(".open-orders-place-holder").load("/exchange/openorders");
+    }, 3000);
 });
 
 $(function () {
-
     /* updating the balance */
     $('#btc-balance').load(function (e) {
         $.getJSON('exchange/balance/usd/', function (data) {
             $('#btc-balance').html(data.btc_balance);
         })
     })
-
 });
 
 $(function () {
+
+    var createOrder = function (type, amount, quantity) {
+        if(type == 'buy') {
+            if(amount == 0) {
+                return {
+                    orderType: "buy",
+                    orderQuantity: quantity,
+                    orderId: "5eb5576d-d983-4073-9574-0d10de9a657a",
+                    accountId: "41bff678-1963-4a2b-9121-6b4e514504df"
+                }
+            }
+            else {
+                return {
+                    orderType : "buy",
+                    orderQuantity : quantity,
+                    orderThreshold : amount,
+                    orderId : "5eb5576d-d983-4073-9574-0d10de9a657a",
+                    accountId : "41bff678-1963-4a2b-9121-6b4e514504df"
+                }
+            }
+        }
+        else {
+            if(amount = 0) {
+                return {
+                    orderType : "sell",
+                    orderQuantity : amount,
+                    orderId : "5eb5576d-d983-4073-9574-0d10de9a657a",
+                    accountId : "41bff678-1963-4a2b-9121-6b4e514504df"
+                }
+            }
+            else {
+                return {
+                    orderType : "sell",
+                    orderQuantity : quantity,
+                    orderThreshold : amount,
+                    orderId : "5eb5576d-d983-4073-9574-0d10de9a657a",
+                    accountId : "41bff678-1963-4a2b-9121-6b4e514504df"
+                }
+            }
+        }
+    };
 
     /* buying */
 
@@ -200,18 +240,15 @@ $(function () {
         var btc_amount = $('#btc-buy-amount').val();
         var buying_price = $('#btc-buy-price-amount').val();
 
-        if(btc_amount != 0 && buying_price != 0 && !isNaN(btc_amount) && !isNaN(buying_price)) {
-            var buy_request = {
-                //id: some session var?
-                amount:btc_amount,
-                price:buying_price
-            };
-            var url = "https://ourdomain/buy";
-            $.post( url, JSON.stringify(buy_request), function (response) {
-                // crate an open order
+        if(btc_amount != 0 && !isNaN(btc_amount)) {
+            var buy_order = createOrder('buy', btc_amount, buying_price);
+            var url = "https://darkpool.herokuapp.com/orders/add";
+            $.post( url, JSON.stringify(buy_order), function (response) {
+                if(response.success == "Order Added") {
+                    $('#buy-btn').fadeOut();
+                }
             })
         }
-
     });
 
     /* selling */
@@ -240,14 +277,12 @@ $(function () {
         var btc_amount = $('#btc-sell-amount').val();
         var selling_price = $('#btc-sell-price-amount').val();
         if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
-            var sell_request = {
-                //id: some session var?
-                amount:btc_amount,
-                price:selling_price
-            };
-            var url = "https://ourdomain/sell";
-            $.post( url, JSON.stringify(sell_request), function (response) {
-                // crate an open order
+            var sell_order = createOrder('sell', btc_amount, selling_price);
+            var url = "https://darkpool.herokuapp.com/orders/add";
+            $.post( url, JSON.stringify(sell_order), function (response) {
+                if(response.success == "Order Added") {
+                    $('#sell-btn').fadeOut();
+                }
             })
         }
     });

@@ -20,4 +20,6 @@ urlpatterns = patterns('',
                        url(r'^pricechart/', views.price_chart, name='Price Chart'),
                        url(r'^depthchart/', views.depth_chart, name='Depth Chart'),
                        url(r'^orderbook/', views.order_book, name='Order Book'),
+                       url(r'^openorders/', views.open_orders, name='Open Orders'),
+                       url(r'^addorder/', views.add_order, name='Add Order'),
 )

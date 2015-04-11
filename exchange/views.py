@@ -56,6 +56,15 @@ def depth_chart(request):
     json = get_depth_chart()
     return HttpResponse(json)
 
+def add_order(request):
+    pass
+
+
+def open_orders(request):
+    template = loader.get_template('exchange/open-orders.html')
+    context = RequestContext(request, {})
+    return HttpResponse(template.render(context))
+
 
 def order_book(request):
     template = loader.get_template('exchange/order-book.html')
