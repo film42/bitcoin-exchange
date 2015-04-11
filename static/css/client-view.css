@@ -195,6 +195,9 @@ body {
   vertical-align: middle;
   border-bottom: 1px solid rgba(206, 210, 213, 0.15);
 }
+.table > thead > tr {
+  border-bottom: 1px solid rgba(206, 210, 213, 0.15);
+}
 .table > tbody > tr > th {
   vertical-align: middle;
   border-bottom: 1px solid rgba(206, 210, 213, 0.15);
@@ -206,7 +209,7 @@ body {
 }
 .ob-sell-table {
   font-size: 12px;
-  margin-bottom: 10px;
+  margin-bottom: 0px;
 }
 .ob-sell-table > thead > tr > th {
   vertical-align: middle;
@@ -223,7 +226,7 @@ body {
 .ob-buy-table {
   font-size: 12px;
   border: hidden;
-  margin-top: 10px;
+  margin-top: 0px;
   padding-left: 20px;
 }
 .ob-buy-table > thead > tr > th {
@@ -237,6 +240,12 @@ body {
   font-weight: bold;
   padding-top: 1px;
   padding-bottom: 1px;
+}
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 0;
+  border-top: 2px solid rgba(206, 210, 213, 0.15);
 }
 .btn-custom {
   color: #222222;

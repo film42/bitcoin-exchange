@@ -12,7 +12,7 @@
 </div>
 <div class="">
   <hr/>
-  <p>{{ spread }} USD SPREAD</p>
+  <p style="text-align: right;margin-right: 40px;margin-bottom: 0">{{ spread }} USD SPREAD</p>
   <hr/>
 </div>
 <div class="table-responsive">
@@ -22,5 +22,8 @@
     <tr><th class="quantity-td">{{ order.0 }}</th><th class="price-td">{{ order.1 }}<th></tr>
     {% endfor %}
     </tbody>
+      <tfoot style="visibility: hidden">
+      <tr><th>Market size</th><th>Price(USD)</th></tr>
+    </tfoot>
   </table>
 </div>

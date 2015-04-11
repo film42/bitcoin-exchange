@@ -269,6 +269,10 @@ body {
     border-bottom: 1px solid @faint-gray;
 }
 
+.table > thead > tr {
+    border-bottom: 1px solid @faint-gray;
+}
+
 .table > tbody > tr > th {
     vertical-align: middle;
     border-bottom: 1px solid @faint-gray;
@@ -283,7 +287,7 @@ body {
 // Order Book Table
 .ob-sell-table {
     font-size: 12px;
-    margin-bottom: 10px;
+    margin-bottom: 0px;
 }
 
 .ob-sell-table > thead > tr > th {
@@ -303,7 +307,7 @@ body {
 .ob-buy-table {
     font-size: 12px;
     border: hidden;
-    margin-top: 10px;
+    margin-top: 0px;
     padding-left: 20px;
 }
 
@@ -319,6 +323,13 @@ body {
     font-weight: bold;
     padding-top: 1px;
     padding-bottom: 1px;
+}
+
+hr {
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border: 0;
+  border-top: 2px solid @faint-gray;
 }
 
 // Buttons
