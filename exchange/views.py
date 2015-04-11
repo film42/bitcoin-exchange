@@ -92,9 +92,9 @@ def get_depth_chart():
 
 def get_price_chart():
     trades = []
-    cur_date = 0
     trades_json = requests.get('https://darkpool.herokuapp.com/trades?limit=250').json()
+    cur_date = len(trades_json)
     for trade in trades_json:
       trades.append([cur_date, trade['price']])
-      cur_date += 1
+      cur_date -= 1
     return str(trades)
