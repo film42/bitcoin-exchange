@@ -160,82 +160,95 @@ $(function() {
     }, 30000);
 });
 
+$(function () {
 
-/* buying */
-
-$('#btc-buy-amount').keyup(function (e) {
-    var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
-    $('#btc-buy-cost').html(cost);
-});
-
-$('#btc-buy-price-amount').keyup(function (e) {
-    var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
-    $('#btc-buy-cost').html(cost);
-});
-
-var calcBuyingCost = function (btc_amount, asking_price) {
-    if(btc_amount != 0 && asking_price != 0 && !isNaN(btc_amount) && !isNaN(asking_price)) {
-        var cost = btc_amount * asking_price;
-        return cost.toFixed(2);
-    }
-    else {
-        return 0;
-    }
-};
-
-$('#buy-btn').click(function (e) {
-    var btc_amount = $('#btc-buy-amount').val();
-    var buying_price = $('#btc-buy-price-amount').val();
-
-    if(btc_amount != 0 && buying_price != 0 && !isNaN(btc_amount) && !isNaN(buying_price)) {
-        var buy_request = {
-            //id: some session var?
-            amount:btc_amount,
-            price:buying_price
-        }
-        var url = "/exchange/buy";
-        $.post(url, JSON.stringify(buy_request), function (response) {
-            // crate an open order
+    /* updating the balance */
+    $('#btc-balance').load(function (e) {
+        $.getJSON('exchange/balance/usd/', function (data) {
+            $('#btc-balance').html(data.btc_balance);
         })
-    }
+    })
 
 });
 
-/* selling */
+$(function () {
 
-$('#btc-sell-amount').keyup(function (e) {
-    var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
-    $('#btc-sell-credit').html(cost);
-});
+    /* buying */
 
-$('#btc-sell-price-amount').keyup(function (e) {
-    var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
-    $('#btc-sell-credit').html(cost);
-});
+    $('#btc-buy-amount').keyup(function (e) {
+        console.log("why?");
+        var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
+        $('#btc-buy-cost').html(cost);
+    });
 
-var calcSellingCredit = function (btc_amount, selling_price) {
-    if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
-        var cost = btc_amount * selling_price;
-        return cost.toFixed(2);
-    }
-    else {
-        return 0;
-    }
-};
+    $('#btc-buy-price-amount').keyup(function (e) {
+        var cost = calcBuyingCost($('#btc-buy-amount').val(), $('#btc-buy-price-amount').val());
+        $('#btc-buy-cost').html(cost);
+    });
 
-$('#sell-btn').click(function (e) {
-    var btc_amount = $('#btc-sell-amount').val();
-    var price = $('#btc-sell-price-amount').val();
-
-    if(btc_amount != 0 && price != 0 && !isNaN(btc_amount) && !isNaN(price)) {
-        var request = {
-            //id: some session var?
-            amount:btc_amount,
-            price:price
+    var calcBuyingCost = function (btc_amount, asking_price) {
+        if(btc_amount != 0 && asking_price != 0 && !isNaN(btc_amount) && !isNaN(asking_price)) {
+            var cost = btc_amount * asking_price;
+            return cost.toFixed(2);
         }
-        var url = "/exchange/sell";
-        $.post(url, JSON.stringify(request), function (response) {
-            // crate an open order
-        })
-    }
+        else {
+            return 0;
+        }
+    };
+
+    $('#buy-btn').click(function (e) {
+        var btc_amount = $('#btc-buy-amount').val();
+        var buying_price = $('#btc-buy-price-amount').val();
+
+        if(btc_amount != 0 && buying_price != 0 && !isNaN(btc_amount) && !isNaN(buying_price)) {
+            var buy_request = {
+                //id: some session var?
+                amount:btc_amount,
+                price:buying_price
+            };
+            var url = "https://ourdomain/buy";
+            $.post( url, JSON.stringify(buy_request), function (response) {
+                // crate an open order
+            })
+        }
+
+    });
+
+    /* selling */
+
+    $('#btc-sell-amount').keyup(function (e) {
+        var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
+        $('#btc-sell-credit').html(cost);
+    });
+
+    $('#btc-sell-price-amount').keyup(function (e) {
+        var cost = calcSellingCredit($('#btc-sell-amount').val(), $('#btc-sell-price-amount').val());
+        $('#btc-sell-credit').html(cost);
+    });
+
+    var calcSellingCredit = function (btc_amount, selling_price) {
+        if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
+            var cost = btc_amount * selling_price;
+            return cost.toFixed(2);
+        }
+        else {
+            return 0;
+        }
+    };
+
+    $('#sell-btn').click(function (e) {
+        var btc_amount = $('#btc-sell-amount').val();
+        var selling_price = $('#btc-sell-price-amount').val();
+        if(btc_amount != 0 && selling_price != 0 && !isNaN(btc_amount) && !isNaN(selling_price)) {
+            var sell_request = {
+                //id: some session var?
+                amount:btc_amount,
+                price:selling_price
+            };
+            var url = "https://ourdomain/sell";
+            $.post( url, JSON.stringify(sell_request), function (response) {
+                // crate an open order
+            })
+        }
+    });
 });
