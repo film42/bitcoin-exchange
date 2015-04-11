@@ -7,26 +7,32 @@ from django.core.urlresolvers import reverse
 
 from model_mommy import mommy
 from rest_framework import status
-from exchange.models import Order, Trade, Exchange, Account
+from exchange.models import Order, Trade, Exchange, Account, User
+from exchange.models import CurrencyTypes, SideTypes, TradeTypes, FilledStatusTypes
 
 
 class OrderCRUD(TestCase):
 
     def test_crud_order(self):
-        order = Order.objects.create(amount=5, limit=5)
+        user = User(username="demo1", email="d1@d.com")
+        user.save()
+
+        order = Order.objects.create(amount=5, limit=5, user=user,
+                                     from_currency=CurrencyTypes.BTC,
+                                     to_currency=CurrencyTypes.USD,
+                                     side=SideTypes.BUY,
+                                     order_type=TradeTypes.LIMIT)
         self.assertEqual(order.amount, 5)
-        self.assertEqual(order.from_currency, '')
+        self.assertEqual(order.from_currency, CurrencyTypes.BTC)
         self.assertEqual(order.limit, 5)
 
         #update
         order.amount = 10
-        order.from_currency = 'r'
         order.limit = 3
         order.save()
 
         #read
         self.assertEqual(order.amount, 10)
-        self.assertEqual(order.from_currency, 'r')
         self.assertEqual(order.limit, 3)
         id = order.id
 
@@ -35,9 +41,11 @@ class OrderCRUD(TestCase):
             Order.objects.get(id=id)
 
     def test_order_limits(self):
+        user = User(username="demo", email="d@d.com")
+        user.save()
 
         # valid btc value
-        order = Order.objects.create(amount=1.00000001, limit=5)
+        order = Order.objects.create(amount=1.00000001, limit=5, user=user)
         self.assertEqual(order.amount, 1.00000001)
 
         # invalid btc value should round to 1
@@ -56,8 +64,11 @@ class OrderCRUD(TestCase):
             order.save()
 
     def test_crud_trade(self):
-        order_sell = Order.objects.create(limit=5, amount=5)
-        order_buy = Order.objects.create(limit=5, amount=5)
+        user = User(username="demo2", email="d2@d.com")
+        user.save()
+
+        order_sell = Order.objects.create(limit=5, amount=5, user=user)
+        order_buy = Order.objects.create(limit=5, amount=5, user=user)
         trade = Trade.objects.create(buy_order_id=order_buy.id, sell_order_id=order_sell.id, rate=3.141596)
 
         # read
