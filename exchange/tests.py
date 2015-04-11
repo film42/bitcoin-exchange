@@ -8,6 +8,7 @@ from django.core.urlresolvers import reverse
 from model_mommy import mommy
 from rest_framework import status
 from exchange.models import Order, Trade, Exchange, Account, User
+from exchange.models import CurrencyTypes, SideTypes, TradeTypes, FilledStatusTypes
 
 
 class OrderCRUD(TestCase):
@@ -16,20 +17,22 @@ class OrderCRUD(TestCase):
         user = User(username="demo1", email="d1@d.com")
         user.save()
 
-        order = Order.objects.create(amount=5, limit=5, user=user)
+        order = Order.objects.create(amount=5, limit=5, user=user,
+                                     from_currency=CurrencyTypes.BTC,
+                                     to_currency=CurrencyTypes.USD,
+                                     side=SideTypes.BUY,
+                                     order_type=TradeTypes.LIMIT)
         self.assertEqual(order.amount, 5)
-        self.assertEqual(order.from_currency, '')
+        self.assertEqual(order.from_currency, CurrencyTypes.BTC)
         self.assertEqual(order.limit, 5)
 
         #update
         order.amount = 10
-        order.from_currency = 'r'
         order.limit = 3
         order.save()
 
         #read
         self.assertEqual(order.amount, 10)
-        self.assertEqual(order.from_currency, 'r')
         self.assertEqual(order.limit, 3)
         id = order.id
 
