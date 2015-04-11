@@ -43,6 +43,7 @@ class BaseModel(models.Model):
 
 
 class User(AbstractUser):
+    guid = UUIDField(auto=True, hyphenate=True)
     pass
 
 
